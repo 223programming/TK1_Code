@@ -1,10 +1,13 @@
 #pragma once
 #ifndef MOTORLIB_H
 #define MOTORLIB_H
+#include <string>
 
 class motor
 {
 public:
+
+	void printData();
 
 	// Define structures and variables
 	struct TransSpecs
@@ -37,17 +40,14 @@ public:
 
 	TransSpecs BaseTransSpecs;
 	MotorSpecs BaseMotorSpecs;
-	MotorSpecs AdjMotSpecs;
 	State currState;
-	State baseState;
-	State intrmdState;
+	State baseState; // specs of motor disregarding transmission data
 
 	// Motor state calculation functions
 	MotorSpecs AdjustSpecs(MotorSpecs baseSpecs, float volts);
-	State AdjForTrans(TransSpecs trans, MotorSpecs baseSpecs, State currState, State prevState);
+	MotorSpecs AdjBaseSpecsForTransData(MotorSpecs baseSpecs, TransSpecs trans);
 
-	float CalcLossTorque(State currState, State prevState, TransSpecs trans, int deltaMsec);
-	
+	float CalcLossTorque(float currSpeed, float prevSpeed, TransSpecs trans, int msecTime);
 	
 	// Adjusted motor calculations - use these in code!
 	void CalcState_SpeedVolts(float speed, float volts, int msecTime);
@@ -58,6 +58,7 @@ public:
 
 
 	// Set specs
+	motor(std::string name, float specVolts, float freeSpeed, float freeAmps, float stallTorque, float stallAmps);
 	void SetTransSpecs(float efficiency, float lossTorque, float MomInertia, float gearReduction);
 	void SetMotorSpecs(float specVolts, float freeSpeed, float freeAmps, float stallTorque, float stallAmps);
 
@@ -86,13 +87,14 @@ public:
 private:
 
 	int lastUpdateMsec = 0;
+	std::string motName;
 
 	// Base motor calculations. These are intermediate methods.
-	State CalcState_SpeedVolts_baseMot(float speed, float volts);
-	State CalcState_TorqueVolts_baseMot(float torque, float volts);
-	State CalcState_AmpsVolts_baseMot(float amps, float volts);
-	State CalcState_PowInVolts_baseMot(float powIn, float volts);
-	State CalcState_SpeedTorque_baseMot(float speed, float torque);
+	State CalcState_SpeedVolts_baseMot(float speed, float volts, MotorSpecs specs);
+	State CalcState_TorqueVolts_baseMot(float torque, float volts, MotorSpecs specs);
+	State CalcState_AmpsVolts_baseMot(float amps, float volts, MotorSpecs specs);
+	State CalcState_PowInVolts_baseMot(float powIn, float volts, MotorSpecs specs);
+	State CalcState_SpeedTorque_baseMot(float speed, float torque, MotorSpecs specs);
 
 };
 

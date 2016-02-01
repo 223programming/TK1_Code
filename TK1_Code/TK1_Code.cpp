@@ -12,13 +12,12 @@ int main()
 {
 	cout << "entering main" << endl;
 	string x;
-	motor test;
-	float fReturn = test.GetStateEfficiencyTotal();
-	cout << fReturn;
-	cout << test.GetStateEfficiencyTotal();
+	// specVolts, freeSpeed, freeCurrent, StallTorque, stallCurrent 
+	motor testCim("testCim", 12.0, 556.0, 2.7, 2.425, 133);
 
-	// test.currState.Amps;
-
+	testCim.SetTransSpecs(0.65, 0, 0, 12.5);
+	testCim.CalcState_SpeedVolts(100, 10.4, 1000);
+	testCim.printData();
 	cin >> x;
 	return 0;
 }

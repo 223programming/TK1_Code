@@ -1,4 +1,5 @@
-﻿  motorLib.cpp
-  TK1_Code.cpp
-  Generating Code...
-  TK1_Code.vcxproj -> C:\Users\developer\Desktop\Development directory\VisualStudio\TK1_Code\Debug\TK1_Code.exe
+﻿  TK1_Code.cpp
+c:\users\developer\desktop\development directory\visualstudio\tk1_code\tk1code_main\tk1_code\tk1_code\tk1_code.cpp(16): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\developer\desktop\development directory\visualstudio\tk1_code\tk1code_main\tk1_code\tk1_code\tk1_code.cpp(18): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\developer\desktop\development directory\visualstudio\tk1_code\tk1code_main\tk1_code\tk1_code\tk1_code.cpp(19): warning C4305: 'argument': truncation from 'double' to 'float'
+  TK1_Code.vcxproj -> C:\Users\developer\Desktop\Development directory\VisualStudio\TK1_Code\TK1Code_main\TK1_Code\Debug\TK1_Code.exe
